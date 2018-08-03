@@ -1,5 +1,4 @@
 //var apiPath = '//taishi.roarpanda.com:9300/';
-var apiPath = './'
 var _getCookie = function (cookie_name) {
   var strCookie = document.cookie;
   //将多cookie切割为多个名/值对
@@ -41,7 +40,8 @@ function loadFacilityData(callback) {
 
 function loadTestData(callback) {
 	//var path = apiPath + 'api/honeypotattack?token=' + _getCookie('token_honeypot');
-	var path = 'http://taishi.roarpanda.com:9300/api/honeypotattack?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Imd1ZXN0Iiwib3JpZ19pYXQiOjE1MzMyNjExMzMsInVzZXJfaWQiOjE2LCJleHAiOjE1MzMyNzkxMzN9.UV_JoRrD03Zm0kM4IFdafAQLAN6JYP5kCaZwYBA7LhA'
+	// var path = 'http://taishi.roarpanda.com:9300/api/honeypotattack?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Imd1ZXN0Iiwib3JpZ19pYXQiOjE1MzMyNjExMzMsInVzZXJfaWQiOjE2LCJleHAiOjE1MzMyNzkxMzN9.UV_JoRrD03Zm0kM4IFdafAQLAN6JYP5kCaZwYBA7LhA'
+	var path = 'http://taishi.roarpanda.com:9300/api/honeypotattack?token=ey'
 	xhr = new XMLHttpRequest();
 	xhr.open( 'GET', path, true );
 	xhr.onreadystatechange = function() {
@@ -142,11 +142,13 @@ function loadAttackType (potName) {
 			break;
 		}
 	}
+	//底部数据
 	//var path = apiPath + 'api/honeytogdetail/';
-	var path = 'http://taishi.roarpanda.com:9300/'
+	var path = 'http://taishi.roarpanda.com:9300/'+'api/honeytogdetail/';
 	$.get(path, {
 		//token: _getCookie('token_honeypot'),
-		token:'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Imd1ZXN0Iiwib3JpZ19pYXQiOjE1MzMyNjExMzMsInVzZXJfaWQiOjE2LCJleHAiOjE1MzMyNzkxMzN9.UV_JoRrD03Zm0kM4IFdafAQLAN6JYP5kCaZwYBA7LhA',
+		//token:'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Imd1ZXN0Iiwib3JpZ19pYXQiOjE1MzMyNjExMzMsInVzZXJfaWQiOjE2LCJleHAiOjE1MzMyNzkxMzN9.UV_JoRrD03Zm0kM4IFdafAQLAN6JYP5kCaZwYBA7LhA',
+		token:"token_key",
 		search: search,
 		section: 0
 	}, function (res) {
