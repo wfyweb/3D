@@ -1,2 +1,3 @@
-# -3D-demo
-炫酷3D地球demo
+# 3D--
+炫酷3D地球
+在线 预览 [demo](http://wfyweb.com/webgl/)
