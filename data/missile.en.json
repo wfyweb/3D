@@ -1,0 +1,8 @@
+{
+	"USA_Western": {"name": "USA_Western", "type": "USA_Western"},
+	"IND_Mumbai": {"name": "IND_Mumbai", "type": "IND_Mumbai"},
+	"ARE_Dubai": {"name": "ARE_Dubai", "type": "ARE_Dubai"},
+	"GER_Frankfurt": {"name": "GER_Frankfurt", "type": "GER_Frankfurt"},
+	"CHN_Shanghai": {"name": "CHN_Shanghai", "type": "CHN_Shanghai"},
+	"AUS_Sydney": {"name": "AUS_Sydney", "type": "AUS_Sydney"}
+}

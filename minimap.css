@@ -1,0 +1,167 @@
+.mini-map{
+  position: fixed;
+  display: none;
+  top: 5.5rem;
+  margin-right: 20px;
+  z-index: 10001;
+  height: calc(100% - 5.5rem - 8.5rem - 20px);
+  width: 40%;
+  max-width: 500px;
+  color: #02b886;
+}
+.mini-map > .map{
+  height: calc(60% - 10px);
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  background-color: rgba(2,62,48,.79);
+}
+.mini-map > .map > header {
+  position: relative;
+  height: 3rem;
+  line-height: 3rem;
+  font-size: 1.2rem;
+  text-align: center;
+  color: #fff;
+  background-color: #065b48;
+}
+.mini-map > .map > header > img {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  height: 1rem;
+}
+.mini-map > .map > .map-container{
+  height: calc(100% - 3rem);
+}
+.mini-map > .map-detail{
+  height: 40%;
+}
+
+.map-act-in{
+  animation: map-act-in .5s ease;
+  animation-fill-mode: forwards;
+}
+@keyframes map-act-in {
+  0%{right: -50%;}
+  100%{right: 0;}
+}
+
+.map-act-out{
+  animation: map-act-out .5s ease;
+  animation-fill-mode: forwards;
+}
+@keyframes map-act-out {
+  0%{right: 0;}
+  100%{right: -50%;}
+}
+
+.swiper-container {
+  width: 100%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.swiper-slide {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  box-sizing: border-box;
+  border-top: 7px solid #065b48;
+  background-color: rgba(2,62,48,.79);
+}
+.swiper-slide h1,
+.swiper-slide p{
+  flex: 1;
+  font-size: 1rem;
+  line-height: 1.2rem;
+  margin: 0;
+}
+
+
+/*attack-type*/
+.attack-type{
+  display: none;
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  width: calc(100% - 40px);
+  height: 7.5rem;
+  box-sizing: border-box;
+}
+.MaliciousInvasion_title {
+  position: absolute;
+  top: -30%;
+}
+.MaliciousInvasion_title i {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: url('./images/time.png') center center / cover no-repeat;
+  vertical-align: middle;
+}
+.MaliciousInvasion_title span {
+  color: #128b71;
+  font-size: 1rem;
+}
+.MaliciousInvasion_view ul {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  background: rgba(0, 115, 87, .7);
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+  border-top: 10px solid #017455;
+  font-size: .8rem;
+}
+.MaliciousInvasion_view ul li {
+  flex: 1;
+  border: 5px solid transparent;
+  border-image-source: url('images/line.png');
+  border-image-slice: 0 0 0 100%;
+  border-image-repeat: stretch;
+  white-space: nowrap;
+}
+.MaliciousInvasion_view ul li:first-of-type {
+  align-self: center;
+  text-align: center;
+  border: none;
+  color: #fff;
+  font-size: 4em;
+  font-weight: bold;
+  text-shadow: 2px 2px 10px #000;
+}
+.MaliciousInvasion_view ul li > div {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  box-sizing: border-box;
+  padding: 1em .2em;
+}
+.MaliciousInvasion_view ul li > div p {
+  height: calc(100% - 20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  font-size: 3em;
+  font-weight: bold;
+  text-shadow: 2px 2px 10px #000;
+  text-align: center;
+}
+.MaliciousInvasion_view ul li > div > span {
+  font-size: 1rem;
+}
+.MaliciousInvasion_view ul li > div > span span {
+  font-size: 0.8em;
+}
+.MaliciousInvasion_view ul li > div span i {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background: url(images/safetyMarking.png) center center / cover no-repeat;
+  vertical-align: middle;
+}

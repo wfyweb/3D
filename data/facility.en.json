@@ -1,0 +1,10 @@
+{
+	"facilities": {
+		"USA_Western": {"name": "USA_Western", "lat": 37.53, "lon": -122.36},
+		"IND_Mumbai": {"name": "IND_Mumbai", "lat": 18.98, "lon": 72.83},
+		"ARE_Dubai": {"name": "ARE_Dubai", "lat": 25.26, "lon": 55.30},
+		"GER_Frankfurt": {"name": "GER_Frankfurt", "lat": 50.12, "lon": 8.68},
+		"CHN_Shanghai": {"name": "CHN_Shanghai", "lat": 30.29, "lon": 120.16},
+		"AUS_Sydney": {"name": "AUS_Sydney", "lat": -37.81, "lon": 144.95}
+	}
+}

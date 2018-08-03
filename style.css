@@ -1,0 +1,810 @@
+html,
+body{
+	height: 100%;
+}
+/* Main Styles */
+body {
+	color: #000000;
+	font-size: 14px;
+	overflow: hidden;
+	font-family: Arial;
+}
+a {
+	color: #ffffff;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+a:hover {
+	color:#8eb423;
+}
+h1 {
+	font-weight:normal;
+}
+h2 {
+	font-weight:normal;
+}
+li {
+	list-style-type: none;
+}
+
+#wrapper {
+	display:block;
+	float:left;
+}
+
+#visualization{
+	position: fixed;
+}
+
+#dataviz {
+	/*background-image: url(images/bgImg.jpg);
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;*/
+	margin: 0px;
+	overflow-y: hidden;
+	overflow-x: auto;
+}
+#overlay_2d{
+	-webkit-perspective: 800;
+	position: absolute;
+	margin: 0px;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+}
+
+.marker {
+	position: absolute;
+	display: inline-block;
+	background-color: transparent;
+	color: #ffffff;
+	font-size: 4pt;
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select none;
+	margin: 0px;
+	border: 0px;
+	border-spacing: 0px;
+	padding: 0px;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+.marker.selected {
+	font-size: 20pt;
+	background-color: rgba(0,0,0,.66);
+	border-spacing: 3px;
+	padding: 10px;
+	cursor: auto;
+}
+
+.marker td {
+	padding: 0px;
+}
+
+.marker .close {
+	width: 8px;
+	height: 8px;
+	background: url('images/close.svg') 0 0 no-repeat;
+	margin-right: 0px;
+	margin-top: 0px;
+	float: right;
+	cursor: pointer;
+	pointer-events: auto;
+	display: none;
+}
+
+.marker.selected .close {
+	display: block;
+}
+
+.test {
+	white-space: nowrap;
+}
+
+
+.detail {
+	display: none;
+	color: #aaaaaa;
+	font-size: 12pt;
+	white-space: nowrap;
+}
+
+.description {
+	display: none;
+	color: #aaaaaa;
+	font-size: 10pt;
+}
+
+.detail .key, .description .key {
+	color: #FFA90B;
+}
+
+#loading {
+	background-color: #111;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	margin-top: -40px;
+	margin-left: -350px;
+	color: white;
+	width: 700px;
+	height: 80px;
+}
+
+#loading h2 {
+	display: table-cell;
+	vertical-align: middle;
+	height: 80px;
+	padding: 0 30px;
+}
+
+
+/*Styles by Pitch*/
+.clear {
+	clear:both;
+}
+
+/*Remove all text selection (except for Text Input)*/
+* {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+input[type='text'] {
+	-webkit-touch-callout: default;
+	-webkit-user-select: auto;
+	-khtml-user-select: auto;
+	-moz-user-select: text;
+	-ms-user-select: text;
+	user-select: text;
+
+}
+/*
+Elements to control the title and test selector
+*/
+.overlayTests {
+	z-index: 10001; /* selected test has z-index:10000*/
+}
+.pointer {
+	pointer-events: auto;
+}
+.noPointer {
+	pointer-events: none;
+}
+
+#glContainer {
+	z-index:1;
+	pointer-events:none;
+}
+#glContainer canvas {
+	z-index:1;
+	pointer-events:none;
+}
+
+#hudHeader {
+	position: absolute;
+	left: 30px;
+	top: 20px;
+	color: #fff;
+	display: none;
+	background: rgba(0,0,0,0.4);
+}
+#hudHeader h1 {
+	font-size: 32px;
+	margin: 0 0 0px 0;
+	display: block;
+	float: left;
+}
+#hudHeader h1 .subtitle {
+	font-size: 14px;
+	color: #ddd;
+
+}
+#hudButtons {
+	display: none;
+	position: absolute;
+	top: calc(5.5rem + 168px + 20px);
+	left: 48px;
+}
+#hudButtons .hudButtonGroup {
+	float: right;
+}
+#hudButtons .testTextInput {
+	float: right;
+	font-size: 17px;
+	width: 300px;
+	margin: 0px 0px 4px 8px;
+	text-transform: uppercase;
+}
+#hudButtons .testsBtn {
+	float: right;
+	height: 24px;
+	background: #333333;
+	padding: 3px 10px 2px;
+	color: white;
+	border: 0;
+	font-size: 18px;
+	cursor: pointer;
+	margin: 0px 0px 4px 8px;
+	opacity: 0.9;
+	-webkit-appearance: none;
+}
+#hudButtons .testsBtn:hover {
+	opacity: 1;
+}
+#hudButtons .searchBtn {
+	width: 76px;
+}
+#hudButtons .aboutBtn {
+	display: block;
+	clear: both;
+	width: 76px;
+}
+#hudButtons .tiltBtn {
+	width: 30px;
+	float: none;
+}
+#hudButtons .topViewBtn {
+	background: #333333 url('images/topview.svg') 7px 4px no-repeat;
+}
+#hudButtons .sideViewBtn {
+	background: #333333 url('images/sideview.svg') 7px 4px no-repeat;
+}
+#hudButtons .zoomBtn {
+	float: none;
+	width: 30px;
+	height: 30px;
+	background-color: rgba(0, 115, 87, .7);
+	color: #fff;
+	font-size: 1rem;
+	font-weight: bold;
+	font-family: monospace;
+	border: none;
+	outline: none;
+}
+#hudButtons .zoomBtn.zoomOutBtn{
+	margin-top: 10px;
+}
+
+.ui-autocomplete {
+	position: absolute;
+	z-index: 10001;
+}
+.ui-autocomplete .ui-menu-item {
+	border-top: 1px solid #656565;
+	margin-left: -39px;
+	padding-left: 4px;
+	font-size: 18px;
+	color: white;
+	background: #333;
+	width: 301px;
+}
+.ui-autocomplete .ui-menu-item .ui-state-active {
+	background: white;
+	color: black;
+	width: 301px;
+	display: block;
+	margin-left: -4px;
+	padding-left: 4px;
+}
+
+/*
+Bar graph on left
+*/
+#barGraph {
+	position: absolute;
+	left:-7px;
+	opacity: 0.9;
+}
+#barGraph .textLabel {
+	font-size: 13px;
+}
+
+#barGraph .successLabel text,#barGraph .failureLabel text,#barGraph .unknownLabel text {
+	fill: white;
+}
+#barGraph .totalLabel {
+	fill: white;
+	font-size: 23px;
+}
+#barGraph .failureLabel {
+	font-size: 14px;
+	fill: #FFA90B;
+}
+#barGraph .successLabel {
+	font-size: 14px;
+	fill: #44B2D4;
+}
+#barGraph .unknownLabel {
+	font-size: 14px;
+	fill: #DDDDDD;
+}
+#barGraph .barGraphLabelBG {
+	fill: rgba(0,0,0,0.8);
+}
+/* histogram and timeline at bottom */
+#history {
+	position: absolute;
+	bottom: 0;
+	left: 386px;
+	background-color: rgba(43,43,43,0.9);
+	display: none;
+}
+#history ul {
+	list-style-type: none;
+	margin: 10px 28px;
+	padding: 0;
+	padding-bottom: 15px;
+	padding-top: 22px;
+	color: white;
+	font-size: 12px;
+	width: 630px;
+	background: url('images/timelineBG.svg') 10px 0 no-repeat;
+}
+#history ul li {
+	width: 42px;
+	float: left;
+	text-align: center;
+	margin-top: -30px;
+	padding-top: 30px;
+	cursor: pointer;
+}
+#history ul li.narrow {
+	display: none;
+}
+#history .timeline #handle {
+	cursor: pointer;
+	width: 36px;
+	height: 36px;
+	background: url('images/yearHandle.png') 0px 0 no-repeat;
+	position: absolute;
+	bottom: 20px;
+	left: 622px;
+}
+#history .graph {
+	display: none;
+}
+#history .close {
+	width: 8px;
+	height: 8px;
+	background: url('images/close.svg') 0 0 no-repeat;
+	margin-right: 8px;
+	margin-top: 5px;
+	float: right;
+	cursor: pointer;
+	pointer-events:auto;
+}
+
+#history .labels {
+	margin-right: 35px;
+}
+#history .labels .outcome {
+	font-size: 23px;
+	color: white;
+	margin-left: 31px;
+	float: left;
+	margin-top: 10px;
+}
+#history .labels .successes {
+	float: right;
+	font-size: 14px;
+	color:#70B4CB;
+	margin-top: 10px;
+}
+#history .labels .failures {
+	float: right;
+	font-size: 14px;
+	color: #FFA90B;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+#history .labels .unknowns {
+	float: right;
+	font-size: 14px;
+	color: #DDDDDD;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+#histogram path {
+	fill: none;
+	stroke-width: 2px;
+}
+#histogram .outcome.failure {
+	fill: #FFA90B;
+}
+#histogram .outcome.success {
+	fill: #44B2D4;
+}
+#histogram .outcome.unknown {
+	fill: #DDDDDD;
+}
+#histogram .tick {
+	fill: none;
+	stroke: #959595;
+}
+#histogram .tickLbl {
+	fill: #fff;
+	font-size: 10px;
+}
+#histogram .plusMinus {
+	font-size: 16px;
+	fill: #fff;
+}
+#histogram ellipse.year {
+	fill: #fff;
+}
+#histogram text.yearLabel {
+	fill: #fff;
+}
+
+/* outcome buttons (bottom left)*/
+#outcomeBtns {
+	width: 302px;
+	position: absolute;
+	left: 38px;
+	color: white;
+	display: none;
+}
+#outcomeBtns .success {
+	float: left;
+	width: 98px;
+}
+#outcomeBtns .failure {
+	float: left;
+	width: 98px;
+	margin-left: 4px;
+}
+#outcomeBtns .unknown {
+	float: left;
+	width: 98px;
+	margin-left: 4px;
+}
+#outcomeBtns .label {
+	float: left;
+	width: 98px;
+	height: 25px;
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 18px;
+	background: #262626;
+	vertical-align: middle;
+	padding-top: 3px;
+	cursor: pointer;
+	opacity: 0.9;
+}
+#outcomeBtns .label:hover {
+	opacity: 1;
+}
+#outcomeBtns .success .label {
+	color: #44B2D4;
+}
+#outcomeBtns .success .label.inactive {
+	color: #22596A;
+}
+#outcomeBtns .failure .label {
+	color: #FFA90B;
+}
+#outcomeBtns .failure .label.inactive {
+	color: #7F5405;
+}
+#outcomeBtns .unknown .label {
+	color: #DDDDDD;
+}
+#outcomeBtns .unknown .label.inactive {
+	color: #6E6E6E;
+}
+
+/* missile type buttons (bottom right)*/
+#missileTypeBtns {
+	/*width: 130px;*/
+	position: absolute;
+	color: white;
+	display: none;
+}
+#missileTypeBtns .missileTypeBtnGroup {
+	float: right;
+}
+#missileTypeBtns>div>div {
+	display: none;
+	cursor: pointer;
+	/*background: #262626;*/
+	opacity: 0.9;
+	margin-bottom: 4px;
+	overflow: hidden;
+}
+#missileTypeBtns>div>div>div {
+	display: inline-block;
+}
+#missileTypeBtns>div>div:hover {
+	opacity: 1;
+}
+#missileTypeBtns .box {
+	float: left;
+	width: 28px;
+	text-align: center;
+	height: 24px;
+}
+#missileTypeBtns .label {
+	/*float: left;*/
+	width: 98px;
+	height: 18px;
+	background: rgba(2, 62, 48, .79);
+	/*text-transform: uppercase;*/
+	font-size: .8rem;
+	vertical-align: middle;
+	padding: 3px 5px 0;
+}
+#missileTypeBtns .showMiniMap {
+	height: 18px;
+	background: rgba(2, 62, 48, .79);
+	/*text-transform: uppercase;*/
+	font-size: 13px;
+	vertical-align: middle;
+	padding: 4px 5px 0;
+}
+#missileTypeBtns .showMiniMap > img {
+	height: 1rem;
+}
+#missileTypeBtns .check {
+	margin: 4px 6px auto;
+	stroke: black;
+}
+#missileTypeBtns .check.inactive {
+	fill-opacity: 0.5;
+	stroke: none;
+}
+
+#graphIcon {
+	width: 42px;
+	height: 42px;
+	position: absolute;
+	bottom: 10px;
+	left: 1255px;
+	cursor: pointer;
+	background: url('images/graphIcon.svg') 0 0 no-repeat;
+	display: none;
+	opacity: 0.9;
+}
+#graphIcon:hover {
+	opacity: 1;
+}
+
+#aboutContainer {
+	display: none;
+	position: absolute;
+	top: 80px;
+	width: 350px;
+	right: 20px;
+	color: white;
+}
+#aboutBox {
+	width: 288px;
+	padding: 20px 30px;
+	background: #323232;
+}
+#aboutBox .title {
+	margin-bottom: 20px;
+	font-weight: bold;
+	font-size: 20px;
+}
+#aboutContainer .arrowUp {
+	width: 0;
+	height: 0;
+	border-left: 15px solid transparent;
+	border-right: 15px solid transparent;
+	border-bottom: 15px solid #323232;
+	margin-left: 293px;
+}
+#aboutBox .text {
+	font-size: 15px;
+}
+#aboutBox a {
+	text-transform: none;
+	font-size: 15px;
+	font-weight: bold;
+	color: #FFA90B;
+}
+#aboutBox a:hover {
+	text-decoration: underline;
+}
+
+
+/* Small size */
+
+@media (max-device-width: 1279px) and (max-width: 1279px) {
+	html,body {
+		position: fixed;
+	}
+	body {
+		min-width: 100%;
+		min-height: 100%;
+	}
+	#hudButtons {
+		right: -484px;
+		top: 90px;
+		width: 504px;
+		background-color: rgba(43,43,43,0.9);
+		padding: 10px 0 6px 0;
+	}
+	#hudButtonHandle {
+		position: absolute;
+		top: 0;
+		left: 0;
+		background: url('images/panelHandle.svg') left center no-repeat;
+		width: 20px;
+		height: 72px;
+		cursor: pointer;
+	}
+	#outcomeBtns {
+		left: -340px;
+	}
+	#missileTypeBtns {
+		right: -130px;
+		top: 180px;
+		width: 150px;
+		background-color: rgba(43,43,43,0.9);
+		padding: 10px 0 6px 0;
+	}
+	#missileTypeBtns>div>div {
+		background: none;
+	}
+	#missileTypeBtnHandle {
+		position: absolute;
+		top: 0;
+		left: 0;
+		background: url('images/panelHandle.svg') left center no-repeat;
+		width: 20px;
+		height: 492px;
+		cursor: pointer;
+	}
+	#barGraph {
+		left: -420px;
+	}
+	#aboutContainer {
+		top: 170px;
+		right: 0;
+	}
+}
+
+@media (max-device-width: 639px) and (max-width: 639px) {
+	body {
+		font-size: 12px;
+	}
+	.detail {
+		font-size: 10pt;
+	}
+	.description {
+		width: 300px;
+	}
+	#loading {
+		margin-left: -50%;
+		width: 100%;
+	}
+	#loading h2 {
+		padding: 0 10px;
+	}
+	.marker.selected {
+		font-size: 16pt;
+	}
+	#hudHeader {
+		left: 10px;
+		top: 10px;
+	}
+	#hudHeader h1 {
+		font-size: 20px;
+	}
+	#hudHeader h1 .subtitle {
+		font-size: 10px;
+	}
+	#hudButtons {
+		right: -380px;
+		top: 52px;
+		width: 400px;
+	}
+	#hudButtons .testTextInput {
+		width: 200px;
+		font-size: 16px;
+	}
+	.ui-autocomplete .ui-menu-item {
+		font-size: 16px;
+		width: 210px;
+	}
+	.ui-autocomplete .ui-menu-item .ui-state-active {
+		width: 210px;
+	}
+	#history ul {
+		margin: 10px 24px;
+		padding: 0;
+		padding-bottom: 15px;
+		padding-top: 22px;
+		font-size: 10px;
+		width: 324px;
+		background: url('images/timelineBG_small.svg') 4px 0 no-repeat;
+	}
+	#history ul li {
+		width: 21px;
+		position: relative;
+		left: 4px;
+	}
+	#history ul li.wide {
+		display: none;
+	}
+	#history ul li.narrow {
+		display: block;
+	}
+	#history .timeline #handle {
+		background: url('images/yearHandle.png') 0px 0 no-repeat;
+		left: 318px;
+	}
+	#history .labels .outcome {
+		font-size: 16px;
+	}
+	#history .labels .successes {
+		font-size: 11px;
+	}
+	#history .labels .failures {
+		font-size: 11px;
+		margin-left: 6px;
+	}
+	#history .labels .unknowns {
+		font-size: 11px;
+		margin-left: 6px;
+	}
+	#missileTypeBtns {
+		top: 138px;
+		padding: 6px 0 4px 0;
+	}
+	#missileTypeBtns>div>div {
+		margin-bottom: 0px;
+	}
+	#missileTypeBtnHandle {
+		height: 418px;
+	}
+	#aboutContainer {
+		top: 126px;
+		width: 320px;
+	}
+	#aboutBox {
+		width: 288px;
+		padding: 12px 16px;
+	}
+	#aboutContainer .arrowUp {
+		margin-left: 263px;
+	}
+	#aboutBox .title {
+		font-size: 16px;
+	}
+	#aboutBox .text {
+		font-size: 12px;
+	}
+	#aboutBox a {
+		font-size: 12px;
+	}
+}
+
+@media (max-device-width: 399px) and (max-width: 399px) {
+	#hudButtons {
+		right: -300px;
+		width: 320px;
+	}
+	.tiltBtn,.zoomBtn {
+		display: none;
+	}
+	#missileTypeBtns .box {
+		height: 20px;
+	}
+	#missileTypeBtns .label {
+		padding-top: 2px;
+	}
+	#missileTypeBtns .check {
+		margin: 2px 6px auto;
+	}
+	#missileTypeBtnHandle {
+		height: 350px;
+	}
+}
